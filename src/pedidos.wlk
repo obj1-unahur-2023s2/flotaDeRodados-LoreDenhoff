@@ -4,8 +4,8 @@ import dependencia.*
 class Pedido{
 	var distRecorrer
 	var tiempoMax
-	var cantPasaj
-	var colIncompatibles = #{}
+	const property cantPasaj
+	const property colIncompatibles = #{}
 	
 	method velocidadRequerida() = (distRecorrer/tiempoMax).truncate(0)
 	method satisfacer(unAuto) {

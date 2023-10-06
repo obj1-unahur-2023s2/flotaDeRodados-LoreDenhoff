@@ -1,6 +1,7 @@
 import rodados.*
 import extras.*
 import dependencia.*
+import pedidos.*
 
 describe"test"{
 
@@ -14,6 +15,10 @@ describe"test"{
 	const kwid_3 = new Kwid(tanque=true)
 	const kwid_4 = new Kwid(tanque=false)
 	const auto_1 = new Especial(capacidad=5 , velMaxima=160 , color="beige" , peso=1200)
+	const viaje_1 = new Pedido (distRecorrer=960 ,tiempoMax=8, cantPasaj=4, colIncompatibles = #{"azul", "negro","rojo","verde","beige"})//vel 120
+	const viaje_2 = new Pedido (distRecorrer=960 ,tiempoMax=8, cantPasaj=3, colIncompatibles = #{"negro"})
+	const viaje_3 = new Pedido (distRecorrer=960 ,tiempoMax=8, cantPasaj=8, colIncompatibles = #{"azul", "negro"})
+	const viaje_4 = new Pedido (distRecorrer=960 ,tiempoMax=6, cantPasaj=2, colIncompatibles = #{"azul", "negro"})
 	
 	method initialize(){
 		trafic.interior(interiorPopular)
@@ -22,6 +27,10 @@ describe"test"{
 		var listaCult = [cachito, kwid_2, kwid_3, kwid_4,trafic]
 		depDeporte.agregarVarios(listaDep)
 		depCultura.agregarVarios(listaCult)
+		depDeporte.agregarPedido(viaje_1)
+		depDeporte.agregarPedido(viaje_2)
+		depCultura.agregarPedido(viaje_3)
+		depCultura.agregarPedido(viaje_4)
 		
 	}
 	
@@ -49,5 +58,17 @@ describe"test"{
 		assert.equals(25, depDeporte.capacidadFaltante())
 		assert.equals(5, depCultura.capacidadFaltante())
 	}	
-	
+	test"Cantidad de pasajeros total de los registros"{
+		assert.equals(7,depDeporte.totalPasajeros())
+		assert.equals(10,depCultura.totalPasajeros())
+	}
+	//test"Ninguno puede"{
+	//	assert.equals([viaje_1],depDeporte.insatisfecho())
+	//}
+	test"Color incompatible"{
+		assert.that(depDeporte.colorIncompatible("negro"))
+	}
+		test"Color incompatible falso"{
+		assert.notThat(depDeporte.colorIncompatible("azul"))
+	}
 }
