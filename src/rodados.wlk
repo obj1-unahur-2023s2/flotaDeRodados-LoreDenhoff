@@ -1,4 +1,5 @@
 import extras.*
+import pedidos.*
 
 class Corsa{
 	var property color

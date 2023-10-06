@@ -1,0 +1,30 @@
+import rodados.*
+import dependencia.*
+import pedidos.*
+
+describe "test"{
+	const cachito = new Corsa(color="rojo")
+	const viaje_1 = new Pedido (distRecorrer=960 ,tiempoMax=8, cantPasaj=4, colIncompatibles = #{"azul", "negro"})
+	const viaje_2 = new Pedido (distRecorrer=960 ,tiempoMax=8, cantPasaj=4, colIncompatibles = #{"azul", "negro", "rojo"})
+	const viaje_3 = new Pedido (distRecorrer=960 ,tiempoMax=8, cantPasaj=6, colIncompatibles = #{"azul", "negro"})
+	const viaje_4 = new Pedido (distRecorrer=960 ,tiempoMax=6, cantPasaj=6, colIncompatibles = #{"azul", "negro"})
+	
+	test "Cachito satisface el viaje"{
+		assert.that(viaje_1.satisfacer(cachito))
+	}
+	test "Cachito no satisface el viaje porque es un color incompatible"{
+		assert.notThat(viaje_2.satisfacer(cachito))
+	}
+	test "Cachito no satisface el viaje por la cantidad de pasajeros"{
+		assert.notThat(viaje_3.satisfacer(cachito))
+	}
+	test "Cachito no satisface el viaje por el tiempo maximo"{
+		assert.notThat(viaje_4.satisfacer(cachito))
+	}
+	test "Viaje relajado"{
+		assert.equals(9,viaje_1.relajar())
+	}
+	test "Viaje acelerado"{
+		assert.equals(5,viaje_4.acelerar())
+	}
+}

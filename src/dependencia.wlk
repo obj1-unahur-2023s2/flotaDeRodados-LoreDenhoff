@@ -2,7 +2,6 @@
 class Dependencia{
 	
 	var flota=[]
-	//const property rodCompartido=[]
 	const property empleados
 	
 	method agregarAFlota(rodado) = flota.add(rodado)
