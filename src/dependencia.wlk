@@ -21,11 +21,13 @@ class Dependencia{
 	method quitarPedido(unPedido) = listPedidos.remove(unPedido)
 	method totalPasajeros() = listPedidos.sum({p => p.cantPasaj()})
 	method insatisfecho() {
-		const noPuede=[]
+		
+		
+	/* 	const noPuede=[]
 			(0..listPedidos.size()-1).forEach({p =>
 				(0..flota.size()-1).forEach({f => if (not listPedidos.get(p).satisfacer(flota.get(f))) noPuede.add(listPedidos.get(p)) })
-			})//en algun lado va un all
-			return noPuede
+			})en algun lado va un all
+			return noPuede*/
 	}
 	
 	method colorIncompatible(unColor) =	(0..listPedidos.size()-1).all({p => listPedidos.get(p).colIncompatibles().asList().contains(unColor)})
